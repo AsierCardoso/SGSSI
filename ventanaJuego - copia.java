@@ -288,28 +288,6 @@ public class ventanaJuego {
         Jugador jugadorActual = juego.getJugadorActual();
         int puntosOtorgados = jugadorActual.getPaises().size();
         int puntosTotales = jugadorActual.getPuntos();
-
-        // Crear la caja para contener el banner
-        Rectangle bannerBackground = new Rectangle(700, 60);
-        bannerBackground.setFill(Color.GRAY);
-        bannerBackground.setArcWidth(20);
-        bannerBackground.setArcHeight(20);
-        bannerBackground.setX(Screen.getPrimary().getBounds().getWidth() / 2 - 350); // Centrar horizontalmente
-        bannerBackground.setY(Screen.getPrimary().getBounds().getHeight() - 120); // Posicionar en la parte inferior
-
-        Text bannerText = new Text("Turno de: " + jugadorActual.getNombre() + " - Se le otorgan " + puntosOtorgados +
-                " puntos. Puntos totales: " + puntosTotales);
-        bannerText.setFill(Color.BLACK);
-        bannerText.setFont(new Font("Arial", 24));
-        bannerText.setX(bannerBackground.getX() + 20); // Alinear el texto dentro de la caja
-        bannerText.setY(bannerBackground.getY() + 40); // Centrar el texto verticalmente en la caja
-
-        layout.getChildren().addAll(bannerBackground, bannerText);
-
-        // Remover el banner después de 5 segundos
-        PauseTransition pause = new PauseTransition(Duration.seconds(5));
-        pause.setOnFinished(e -> layout.getChildren().removeAll(bannerBackground, bannerText));
-        pause.play();
     }
 
 
@@ -322,55 +300,8 @@ public class ventanaJuego {
         // Limpiar el panel antes de añadir los textos actualizados
         infoColoresPane.getChildren().clear();
 
-        // Crear la caja de fondo nuevamente para la información de los jugadores
-        int panelHeight = 40 + (juego.getJugadores().size() * 25); // Ajustar la altura según el número de jugadores
-        Rectangle infoColoresBackground = new Rectangle(300, panelHeight); // Fondo negro para la información
-        infoColoresBackground.setFill(Color.rgb(0, 0, 0, 0.8)); // Color negro con opacidad
-        infoColoresBackground.setArcWidth(20); // Bordes redondeados
-        infoColoresBackground.setArcHeight(20);
-        infoColoresBackground.setX(40);
-        infoColoresBackground.setY(70);
-
-        // Añadir el fondo antes de los textos de los jugadores
-        infoColoresPane.getChildren().add(infoColoresBackground);
-
-        // Añadir el texto de cada jugador con su color
-        for (int i = 0; i < juego.getJugadores().size(); i++) {
-            Jugador jugador = juego.getJugadores().get(i);
-            String color;
-            Color textColor;
-
-            switch (i) {
-                case 0 -> {
-                    color = "Rojo";
-                    textColor = Color.LIGHTCORAL;
-                }
-                case 1 -> {
-                    color = "Azul";
-                    textColor = Color.LIGHTBLUE;
-                }
-                case 2 -> {
-                    color = "Verde";
-                    textColor = Color.LIGHTGREEN;
-                }
-                case 3 -> {
-                    color = "Morado";
-                    textColor = Color.PLUM;
-                }
-                default -> {
-                    color = "Desconocido";
-                    textColor = Color.WHITE;
-                }
-            }
-            Text jugadorInfo = new Text("Jugador " + (i + 1) + ": " + color + " - Puntos: " + jugador.getPuntos());
-            jugadorInfo.setFill(textColor);
-            jugadorInfo.setFont(new Font("Arial", 16));
-            jugadorInfo.setX(50);
-            jugadorInfo.setY(90 + (i * 25));
-
-            // Añadir la información de cada jugador al panel
-            infoColoresPane.getChildren().add(jugadorInfo);
-        }
+        
+        
     }
 
     public void mostrar(Stage stage) {
